@@ -11,7 +11,8 @@
             향후 6개월 부동산 아파트 매매가격 지수 예측합니다. <br>
             가장 최적의 시기에 매매하여 부자가 되세요.</p>
     </div>
-    <br><br>
+
+        <h5 id="ment">값을 입력해보세요! <span style="font-size: 1rem; color: #787878;">ex> 1.24 | 512342 | 3.83 | 62391</span></h5> <br>
     <form action="{% url 'accounts:predict' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="first" placeholder="금리" id="first">
@@ -23,7 +24,6 @@
         
         <br><br>
         <div>
-            <h4>입력 값: </h4>
             <h6>금리 : {{ first }}</h6>
             <h6>국내 총생산 : {{ second }}</h6>
             <h6>대출 금리 : {{ third }}</h6>

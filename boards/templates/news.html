@@ -22,22 +22,29 @@
             <li class="nav-item text-light"><a href="{% url 'boards:아파트실거래가_2분위' %}">map2</a></li>
             <li class="nav-item text-light"><a href="{% url 'boards:아파트실거래가_3분위' %}">map3</a></li>
             <li class="nav-item text-light"><a href="{% url 'boards:아파트실거래가_4분위' %}">map4</a></li>
-            <li class="nav-item text-light"><a href="{% url 'boards:news' %}">부동산실거래가</a></li>
+            <li class="nav-item text-light"><a href="{% url 'boards:news' %}">뉴스 기사</a></li>
         </ul>
     </nav>
 
 
-    <div class="year">
-        <div class="al">
-            <a href="{% url 'boards:news21_1' %}">21년도 1분기</a>
-            <a href="{% url 'boards:news21_2' %}">21년도 2분기</a>
-            <a href="{% url 'boards:news21_3' %}">21년도 3분기</a>
-            <a href="{% url 'boards:news21_4' %}">21년도 4분기</a>
-            <a href="{% url 'boards:news22_1' %}">22년도 1분기</a>
-            <a href="{% url 'boards:news22_2' %}">22년도 2분기</a>
-            <a href="{% url 'boards:news22_3' %}">22년도 3분기</a>
-            <a href="{% url 'boards:news22_4' %}">22년도 4분기</a>
-        </div>
-    </div>
-</body>
+    <div id="back">
+      <h4 style="color: white;">분기별 뉴스 보기</h4>
+      <p style="color: white;">글을 누르시면 분기별 뉴스 기사를 볼 수 있습니다.</p>
+  </div>
+  <br><br>
+
+  <table class="table table-striped" style="text-align: center;">
+      <tbody>
+      <tr><td><a class="ta" href="{% url 'boards:news21_1' %}">21년도 1분기</a></td></tr>
+      <tr><td><a class="ta" href="{% url 'boards:news21_2' %}">21년도 2분기</a></td></tr>
+      <tr><td><a class="ta" href="{% url 'boards:news21_3' %}">21년도 3분기</a></td></tr>
+      <tr><td><a class="ta" href="{% url 'boards:news21_4' %}">21년도 4분기</a></td></tr>
+      <tr><td><a class="ta" href="{% url 'boards:news22_1' %}">22년도 1분기</a></td></tr>
+      <tr><td><a class="ta" href="{% url 'boards:news22_2' %}">22년도 2분기</a></td></tr>
+      <tr><td><a class="ta" href="{% url 'boards:news22_3' %}">22년도 3분기</a></td></tr>
+      <tr><td><a class="ta" href="{% url 'boards:news22_4' %}">22년도 4분기</a></td></tr>
+      </tbody>
+  </table>
+ 
+
 </html>
