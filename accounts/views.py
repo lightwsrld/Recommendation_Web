@@ -6,6 +6,8 @@ from .forms import LoginForm
 from django.http.request import HttpRequest
 from joblib import load
 import pandas as pd
+import user_recomm
+import os
 
 def home(request):
     user_id = request.session.get('user')
@@ -63,26 +65,21 @@ def logout(request):
 def predict(request:HttpRequest, *args, **kwargs):
     if request.method == "POST":
         predict = Predict()
-        predict.first = request.POST['first']
-        predict.second = request.POST['second']
-        predict.third = request.POST['third']
-        predict.fourth = request.POST['fourth']
+        predict.id = request.POST['id']
 
-        model = load('accounts\house.joblib')
+        prediction = user_recomm.predict(predict.id)
 
-        input_variables = pd.DataFrame([[predict.first, predict.second, predict.third, predict.fourth]],
-                        columns=['금리', '국내총생산', '대출금리', '아파트거래량'],
-                        dtype='float',
-                        index=['input'])
+        dir = "데이터/포스터"
+        files = os.listdir(dir)
+        matching = [s for s in files if prediction.index[0] in s] 
 
-        prediction = model.predict(input_variables)[0]
+        img = "/데이터/포스터/" + matching[0]
 
         context = {
-        "first" : predict.first,
-        "second" : predict.second,
-        "third" : predict.third,
-        "fourth" : predict.fourth,
-        "prediction" : prediction
+        "id" : predict.id,
+        "img" : img,
+        "first" : prediction.index[0],
+        "prediction" : prediction.to_html()
         }
 
         return render(request, 'index.html', context=context)

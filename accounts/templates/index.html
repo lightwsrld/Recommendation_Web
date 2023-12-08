@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block contents %}
-    
 
     
 
@@ -13,24 +12,29 @@
     </div>
 
         <h5 id="ment">값을 입력해보세요! <span style="font-size: 1rem; color: #787878;">ex> 1.24 | 512342 | 3.83 | 62391</span></h5> <br>
-    <form action="{% url 'accounts:predict' %}" method="post" enctype="multipart/form-data">
+    <div class="result">
+        <form action="{% url 'accounts:predict' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="text" name="first" placeholder="금리" id="first">
-        <input type="text" name="second" placeholder="국내 총생산" id="second">
-        <input type="text" name="third" placeholder="대출 금리" id="third">
-        <input type="text" name="fourth" placeholder="매매 거래량" id="fourth">
+            <input type="text" name="id" placeholder="아이디" id="id">
+            <input type="submit" onsubmit="toggleContent()" class="button" value="predict">
+            {% if id %}
+            <br><br>
+            <h3><span class="id_emp">{{ id }}</span> 님께 가장 추천하는 공연은 <span class="emp">{{ first }}</span></h3>
+            <h3>{{ img }}</h3>
+            {% load static %}
+            <img src="{% static '뮤지컬 \'벤허\'.png' %}">
+            <h4>👇 추천되는 공연 10가지와 점수 👇</h4>
+            <h5>{{ prediction|safe }}</h5>
+            {% endif %}
+        </form>
+    </div>
+    <script>
+        function toggleContent() {
+          var content = document.getElementById("content");
+          content.classList.toggle("active");
+        }
+      </script>
     
-        <input type="submit" value="predict">
-        
-        <br><br>
-        <div>
-            <h6>금리 : {{ first }}</h6>
-            <h6>국내 총생산 : {{ second }}</h6>
-            <h6>대출 금리 : {{ third }}</h6>
-            <h6>매매 거래량 : {{ fourth }}</h6>
-            <h5>예측 값 : {{ prediction }}</h5>
-        </div>
-    </form>
 
     <br><br><br>
     <div>

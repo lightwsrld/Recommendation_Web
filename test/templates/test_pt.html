@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      margin: 50px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .content {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <form onsubmit="toggleContent(); return false;">
+    <input type="submit" value="Toggle Content" class="button">
+  </form>
+  <div class="content" id="myContent">
+    <!-- Your content goes here -->
+    This is the content that will be toggled.
+  </div>
+</div>
+
+<script>
+  function toggleContent() {
+    var content = document.getElementById("myContent");
+    content.classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>

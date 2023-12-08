@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    
+
+    <div id="back">
+        <h4 style="color: white;">부자로 가는 길</h4>
+        <p style="color: white;">전국 부동산 아파트 매매가격 지수 예측
+            향후 6개월 부동산 아파트 매매가격 지수 예측합니다. <br>
+            가장 최적의 시기에 매매하여 부자가 되세요.</p>
+    </div>
+
+        <h5 id="ment">값을 입력해보세요! <span style="font-size: 1rem; color: #787878;">ex> 1.24 | 512342 | 3.83 | 62391</span></h5> <br>
+    <form action="{% url 'accounts:predict' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="predict">
+            <input type="text" name="id" placeholder="아이디" id="id">
+            <input type="submit" value="predict">
+        
+            <br><br>
+            <div class="predict-content">
+                <h3>{{ id }} 님께 가장 추천하는 공연은 {{ first }} 입니다.</h3>
+                <h4>👇 추천되는 공연 10가지와 점수 👇</h4>
+                <h5>{{ prediction|safe }}</h5>
+            </div>
+        </div>
+        
+    </form>
+
+    <br><br><br>
+    <div>
+        <h4>LDA, 워드클라우드 링크 첨부</h4>
+        <p>과거부터 지금까지의 Hot keyword 한 눈에 확인!</p>
+    </div>
+
+    <a href="{% url 'boards:test' %}" style="text-decoration: none; color: black; ">LDA 보기</a> <br>
+    <a href="{% url 'boards:apart' %}" style="text-decoration: none; color: black;">워드클라우드</a>
+
+    <div id="wd">
+    <div id="wordcloud1" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://i.ibb.co/gvKydwq/p21-1.png" class="d-block w-100 h-100" alt="..." />
+                <div class="carousel-caption">21년 1월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/Lz3mk3h/p21-2.png" class="d-block w-100" alt="..." />
+                <div class="carousel-caption">21년 2월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/WstVCTn/p21-3.png" class="d-block w-100" alt="..." />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/L9Ztc9D/p21-4.png" alt="p21-4" class="d-block w-100"/>
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/4W0zC0L/p21-5.png" alt="p21-5" class="d-block w-100"/>
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/w4W74jf/p21-6.png" alt="p21-6" class="d-block w-100"/>
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/XZFTVLh/p21-7.png" alt="p21-7" class="d-block w-100 h-100" />
+                <div class="carousel-caption">21년 7월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/TrVYX6C/p21-8.png" alt="p21-8" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/VWKzSFM/p21-9.png" alt="p21-9" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/bLSsHLr/p21-10.png" alt="p21-10" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/D8WL47P/p21-11.png" alt="p21-11" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/vJRvqBf/p21-12.png" alt="p21-12" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/vj6SX2q/p22-1.png" alt="p22-1" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/BqJJ41X/p22-2.png" alt="p22-2" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/2jFb0FT/p22-3.png" alt="p22-3" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/47w7sQC/p22-4.png" alt="p22-4" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/G0rfD5d/p22-5.png" alt="p22-5" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/dBhdK7D/p22-6.png" alt="p22-6" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/Ryhzn88/p22-7.png" alt="p22-7" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/yy8zfWP/p22-8.png" alt="p22-8" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/zS34fNQ/p22-9.png" alt="p22-9" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/tbMR06D/p22-10.png" alt="p22-10" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/N1107C5/p22-11.png" alt="p22-11" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/xgFPJz0/p22-12.png" alt="p22-12" class="d-block w-100" />
+                <div class="carousel-caption">22년 12월</div>
+            </div>
+        </div>
+        <button class="carousel-control-prev btn btn-primary" type="button" data-bs-target="#wordcloud1" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next btn btn-primary" type="button" data-bs-target="#wordcloud1" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div id="wordcloud2" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://i.ibb.co/5nTx36t/21-1.png" class="d-block w-100 h-100" alt="..." />
+                <div class="carousel-caption">21년 1월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/7vmqfPY/21-2.png" class="d-block w-100" alt="..." />
+                <div class="carousel-caption">21년 2월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/McWz0bB/21-3.png" class="d-block w-100" alt="..." />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/LZJBkJs/21-4.png" alt="p21-4" class="d-block w-100"/>
+                <div class="carousel-caption">21년 4월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/74KBSc3/21-5.png" alt="p21-5" class="d-block w-100"/>
+                <div class="carousel-caption">21년 5월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/vXKZKX9/21-6.png" alt="p21-6" class="d-block w-100"/>
+                <div class="carousel-caption">21년 6월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/MPqqtbY/21-7.png" alt="p21-7" class="d-block w-100 h-100" />
+                <div class="carousel-caption">21년 7월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/ygQmJj6/21-8.png" alt="p21-8" class="d-block w-100" />
+                <div class="carousel-caption">21년 8월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/Kzhc2zM/21-9.png" alt="p21-9" class="d-block w-100" />
+                <div class="carousel-caption">21년 9월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/SVfpNPW/21-10.png" alt="p21-10" class="d-block w-100" />
+                <div class="carousel-caption">21년 10월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/kSKPvgn/21-11.png"  alt="p21-11" class="d-block w-100" />
+                <div class="carousel-caption">21년 11월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/nR7cLdy/21-12.png" alt="p21-12" class="d-block w-100" />
+                <div class="carousel-caption">21년 12월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/0rZ8zRc/22-1.png" alt="p22-1" class="d-block w-100" />
+                <div class="carousel-caption">22년 1월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/CPkBMKW/22-2.png" alt="p22-2" class="d-block w-100" />
+                <div class="carousel-caption">22년 2월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/5hTvWvL/22-3.png" alt="p22-3" class="d-block w-100" />
+                <div class="carousel-caption">22년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/ZSPV3M9/22-4.png" alt="p22-4" class="d-block w-100" />
+                <div class="carousel-caption">22년 4월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/kcG3hYy/22-5.png" alt="p22-5" class="d-block w-100" />
+                <div class="carousel-caption">22년 5월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/r0SvxbJ/22-6.png" alt="p22-6" class="d-block w-100" />
+                <div class="carousel-caption">22년 6월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/fkH89fy/22-7.png" alt="p22-7" class="d-block w-100" />
+                <div class="carousel-caption">22년 7월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/zGDNjR1/22-8.png" alt="p22-8" class="d-block w-100" />
+                <div class="carousel-caption">22년 8월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/1T9XxG1/22-9.png" alt="p22-9" class="d-block w-100" />
+                <div class="carousel-caption">22년 9월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/h98XJjw/22-10.png" alt="p22-10" class="d-block w-100" />
+                <div class="carousel-caption">22년 10월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/gwBdYmb/22-11.png" alt="p22-11" class="d-block w-100" />
+                <div class="carousel-caption">22년 11월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/Y0drW8k/22-12.png" alt="p22-12" class="d-block w-100" />
+                <div class="carousel-caption">22년 12월</div>
+            </div>
+        </div>
+        <button class="carousel-control-prev btn btn-primary" type="button" data-bs-target="#wordcloud2" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next btn btn-primary" type="button" data-bs-target="#wordcloud2" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    </div>
+    <footer class="py-3 bg-secondary">
+        <div class="container">
+            <p class="m-0 text-center text-white">
+                과거부터 지금까지의 Hot keyword 한 눈에 확인!
+            </p>
+        </div>
+    </footer>
+
+
+{% endblock %}

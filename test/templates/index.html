@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>number image reader</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+   
+<body>
+<h1>Number Image Predictor based on SVHN data</h1>
+<div class="agile-its">
+    <h2>ML Web Service with Flask</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="predict">
+            <input type="text" name="id" placeholder="아이디" id="id">
+            <input type="button" onclick="toggleContent()" value="predict">
+            <br><br>
+            <div class="predict-content">
+                <h3>{{ id }} 님께 가장 추천하는 공연은 {{ first }} 입니다.</h3>
+                <h4>👇 추천되는 공연 10가지와 점수 👇</h4>
+                <h5>{{ prediction|safe }}</h5>
+            </div>
+        </div>
+        
+    </form>
+    </div>
+</div>
+<script>
+    function toggleContent() {
+      var content = document.getElementById("id");
+      content.classList.toggle("active");
+    }
+  </script>
+</body>
+   
+</html>

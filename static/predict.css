@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.container {
+    text-align: center;
+    margin: 50px;
+  }
+
+.result {
+    text-align: center;
+    margin: 50px;
+}
+
+  .active {
+    display: block;
+  }
+
+  .emp {
+    border: 1px solid #FFBEBE	;
+    background-color: #FF6E6E;
+    background-origin: content-box;
+  }
+
+  .id_emp {
+    font-weight: bold;
+    background-color: yellow;
+    background-origin: content-box;
+  }
+
+  table {
+    margin-left:auto; 
+    margin-right:auto;
+}
