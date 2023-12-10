@@ -6,8 +6,9 @@ from .forms import LoginForm
 from django.http.request import HttpRequest
 from joblib import load
 import pandas as pd
-import user_recomm
-import os
+from accounts import user_recomm, title_recomm
+import unicodedata
+from django.conf import settings
 
 def home(request):
     user_id = request.session.get('user')
@@ -63,25 +64,53 @@ def logout(request):
 
 
 def predict(request:HttpRequest, *args, **kwargs):
+    df = pd.read_csv('데이터\연극+뮤지컬_TOP77.csv')
+    df['Image'] = [unicodedata.normalize('NFC', filename) for filename in df['Image']]
     if request.method == "POST":
         predict = Predict()
         predict.id = request.POST['id']
 
         prediction = user_recomm.predict(predict.id)
 
-        dir = "데이터/포스터"
-        files = os.listdir(dir)
-        matching = [s for s in files if prediction.index[0] in s] 
-
-        img = "/데이터/포스터/" + matching[0]
-
         context = {
-        "id" : predict.id,
-        "img" : img,
-        "first" : prediction.index[0],
-        "prediction" : prediction.to_html()
+            "id": predict.id,
+            "first" : prediction.index[0]
         }
+
+        first_row = prediction.iloc[0]
+
+        context["img"] = first_row['Image']
+        # input_title에 해당하는 이미지 파일 
+        context["prediction"] = prediction.to_html()
+
 
         return render(request, 'index.html', context=context)
     
+    return render(request, 'index.html')
+
+def predict_1(request: HttpRequest, *args, **kwargs):
+    df = pd.read_csv('데이터\연극+뮤지컬_TOP77.csv')
+    df['Image'] = [unicodedata.normalize('NFC', filename) for filename in df['Image']]
+
+    if request.method == "POST":
+        predict_1 = Predict()
+        predict_1.title = request.POST['title']
+
+        prediction_1 = title_recomm.image_plus(predict_1.title)
+
+        context = {
+            "title": predict_1.title,
+        }
+
+        first_row = prediction_1.iloc[0]
+
+        context["first_title"] = first_row['Title']
+        context["img"] = first_row['Image']
+        # input_title에 해당하는 이미지 파일 
+        matching_row = df[df['Title'] == predict_1.title].iloc[0]
+        context["matching_img"] = matching_row['Image']
+        context["prediction_1"] = prediction_1.to_html()
+
+        return render(request, 'index.html', context=context)
+
     return render(request, 'index.html')

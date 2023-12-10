@@ -140,7 +140,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from torch.utils.data import Dataset
 
-import torchvision.transforms as T
+# import torchvision.transforms as T
 import torch.nn as nn
 import torch.optim as optim
 
@@ -157,66 +157,13 @@ import pickle
 import unicodedata
 
 
-model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3), pooling='max')
-embedder = SentenceTransformer('jhgan/ko-sroberta-multitask')
-embedder.max_seq_len = 128
-extensions = ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.gif']
+def load_pickle(filename):
+    with open(filename, 'rb') as f:
+        res = pickle.load(f)
+    return res
 
-def plot_vector(df, embedder):
-  df['줄거리'] = df['줄거리'].apply(lambda x: re.sub(r'[^가-힣a-zA-Z\s]', '', x))
-  stories = df['줄거리'].tolist()
-  story_embeddings = embedder.encode(stories, convert_to_tensor=True)
-  xx = pd.DataFrame(story_embeddings)
-  return xx
-
-def extract_features(img_path, model):
-
-    input_shape = (224, 224, 3)
-    img = image.load_img(img_path, target_size=(input_shape[0], input_shape[1]))
-    img_array = image.img_to_array(img)
-
-    expanded_img_array = np.expand_dims(img_array, axis=0)
-
-    preprocessed_img = preprocess_input(expanded_img_array)
-
-    features = model.predict(preprocessed_img)
-
-    normalized_features = features / norm(features)
-
-    return normalized_features
-
-def get_file_list(root_dir):
-    file_list = []
-    counter = 1
-    for root, directories, filenames in os.walk(root_dir):
-        for filename in filenames:
-            if any(ext in filename for ext in extensions):
-                file_list.append(os.path.join(root, filename))
-                counter += 1
-    return file_list
-
-
-def feature(model):
-    root_dir = '데이터\포스터'
-    filenames = sorted(get_file_list(root_dir))
-    filenames = [unicodedata.normalize('NFC', filename) for filename in filenames]
-    feature_list = []
-    for i in tqdm_notebook(range(len(filenames))):
-        feature_list.append(extract_features(filenames[i], model)[0])
-    return filenames, feature_list
-
-def image_vector(model):
-  filenames, feature_list = feature(model)
-  x = pd.DataFrame(feature_list)
-  return x
-
-def p_i_main(model):
-  pv = plot_vector(top_poster,embedder)
-  iv = image_vector(model)
-  plot_image_v = pd.concat([pv, iv], axis=1)
-  return plot_image_v
-
-plot_image_v = p_i_main(model)
+location = '데이터/'
+plot_image_v = load_pickle(location+'sbert_vgg16_vecs.pickle')
 top_stat = pd.concat([plot_image_v, stat], axis=1)
 
 def plot_image_sim(title):
@@ -641,6 +588,10 @@ def find_title(top_lank, title_input):
 
 def predict(userid):
    result = mat_content_image(userid)
+   df_1 = pd.read_csv('데이터\연극+뮤지컬_TOP77.csv')
+   df_1 = df_1.drop(df_1.columns[0], axis=1)
+   df_1['Image'] = [unicodedata.normalize('NFC', filename) for filename in df_1['Image']]
+   result['Image'] = result.index.map(lambda x: df_1[df_1['Title'] == find_title(df_1, x)]['Image'].iloc[0])
    return result
 
 #import joblib
