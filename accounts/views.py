@@ -84,9 +84,9 @@ def predict(request:HttpRequest, *args, **kwargs):
         context["prediction"] = prediction.to_html()
 
 
-        return render(request, 'index.html', context=context)
+        return render(request, '아파트실거래가_3분위.html', context=context)
     
-    return render(request, 'index.html')
+    return render(request, '아파트실거래가_3분위.html')
 
 def predict_1(request: HttpRequest, *args, **kwargs):
     df = pd.read_csv('데이터\연극+뮤지컬_TOP77.csv')
@@ -111,6 +111,6 @@ def predict_1(request: HttpRequest, *args, **kwargs):
         context["matching_img"] = matching_row['Image']
         context["prediction_1"] = prediction_1.to_html()
 
-        return render(request, 'index.html', context=context)
+        return render(request, '아파트실거래가_4분위.html', context=context)
 
-    return render(request, 'index.html')
+    return render(request, '아파트실거래가_4분위.html')
