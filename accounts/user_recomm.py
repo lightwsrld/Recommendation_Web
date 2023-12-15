@@ -18,8 +18,8 @@ def concat_play_musical(play, musical):
 
 play_top = "데이터\연극\연극_TOP77_장소병합.xlsx"
 musical_top = "데이터\뮤지컬\뮤지컬_TOP77.xlsx"
-play_top_star = "데이터\연극\playTop77_star.xlsx"
-musical_top_star = "데이터\뮤지컬\musicalTop77_star.xlsx"
+play_top_star = "데이터\연극_평점 (최종)_추가.xlsx"
+musical_top_star = "데이터\뮤지컬_평점 (최종)_추가.xlsx"
 play_actor_lank = "데이터\연극\연극 배우 랭킹.csv"
 musical_actor_lank = "데이터\뮤지컬\뮤지컬 배우 랭킹.csv"
 play_top_cast = "데이터\연극\playTop77_casting.xlsx"
@@ -531,7 +531,7 @@ import pandas as pd
 # 여기만 바뀜 score(title) ==> score_pg(title)
 def score_list(high_rated_titles):
   # 사용자의 가장 높은 평점 작품 : score 함수 => 합산
-  scaler = MinMaxScaler((0,0.7))
+  scaler = MinMaxScaler((0,0.3))
   scaler_10 = MinMaxScaler((0,10))
   df = pd.DataFrame()
   for title in high_rated_titles:
@@ -546,7 +546,7 @@ def score_list(high_rated_titles):
 
 # 협업
 def collab_list(userid):
-  scaler = MinMaxScaler((0,0.3))
+  scaler = MinMaxScaler((0,0.7))
   scaler_10 = MinMaxScaler((0,10))
   # user의 가장 높은 평점 찾기, 해당 타이틀 추출
   total_star = top_star.reset_index(drop=True)
