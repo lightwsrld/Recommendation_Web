@@ -2,72 +2,70 @@
 
 {% block contents %}
 
-    
-    <div id="back">
-        <h4 style="color: white;">부자로 가는 길</h4>
-        <p style="color: white;">전국 부동산 아파트 매매가격 지수 예측
-            향후 6개월 부동산 아파트 매매가격 지수 예측합니다. <br>
-            가장 최적의 시기에 매매하여 부자가 되세요.</p>
-    </div>
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>        
 
-        <h5 id="ment">값을 입력해보세요! <span style="font-size: 1rem; color: #787878;">ex> 1.24 | 512342 | 3.83 | 62391</span></h5> <br>
-    <div class="result">
-
-    <form action="{% url 'accounts:predict' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="text" name="id" placeholder="아이디" id="id">
-        <input type="submit" onsubmit="toggleContent()" class="button" value="predict">
-        {% if id %}
-        {%load static%}
-            <br><br>
-            <h3><span class="id_emp">{{ id }}</span> 님께 가장 추천하는 공연은 <span class="emp">{{ first }}</span></h3>
-            <img src="{% static '이미지/' %}{{ img }}" alt="공연 이미지"> 
-            <br><br> 
-            <h4>👇 추천되는 공연 10가지와 점수 👇</h4>
-            <h5>{{ prediction|safe }}</h5>
-        {% endif %}
-    </form>
-
-    <form action="{% url 'accounts:predict_1' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="text" name="title" placeholder="작품 이름" id="title">
-        <input type="submit" onsubmit="toggleContent()" class="button" value="predict_1">
-        {% if first_title %}
-            {%load static%}
-            <br><br>
-            <h3><span class="title_emp">{{ title }}</span> 을 고른 분께 가장 추천하는 공연은 <span class="emp">{{ first_title }}</span></h3>
-            <img src="{% static '이미지/' %}{{ matching_img }}" alt="공연 이미지" style="margin-right: 20px;">
-            <img src="{% static '이미지/' %}{{ img }}" alt="공연 이미지"> 
-            <br><br> 
-            <h4>👇 추천되는 공연 10가지와 점수 👇</h4>
-            <h5>{{ prediction_1 |safe }}</h5>
-        {% endif %}
-    </form>
-
-    </div>
-    <script>
-        function toggleContent() {
-          var content = document.getElementById("content");
-          content.classList.toggle("active");
+        header.back {
+            padding-top: 10rem;
+            padding-bottom: calc(10rem - 4.5rem);
+            background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("https://i.ibb.co/xmtn1c5/19e3b2227c099c2033206fc7142c083f.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            width: 100%;
+            height: 800px;
         }
-      </script>
-    
 
-    <br><br><br>
-    <div>
+        .image-container {
+            width: 80%; 
+            height: 70%;
+            margin-left: auto;
+            margin-right: auto; 
+        }
+        .image-container img {
+            max-width: 100%; 
+            max-height: 100%; 
+            display: block; 
+            text-align: center; 
+            float: left;
+            margin-left: 5;
+            margin-right: 5;
+        }
+    </style>
+
+    <header class="back">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-end">
+                    <h1 class="text-white font-weight-bold" style="font-weight: 800;">Artes</h1>
+                    <hr class="divider" />
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white mb-5" style="font-size: 18px; font-weight: 500;">다채로운 예술 세계, 당신을 위한 발견의 여정<br>
+                        여러 예술 분야의 매력을 하나로 만나보세요!</p>
+                </div>
+            </div>
+        </div>
+
+    <br><br>
+    <!--<div>
         <h4>LDA, 워드클라우드 링크 첨부</h4>
         <p>과거부터 지금까지의 Hot keyword 한 눈에 확인!</p>
     </div>
 
-    <a href="{% url 'boards:test' %}" style="text-decoration: none; color: black; ">LDA 보기</a> <br>
-    <a href="{% url 'boards:apart' %}" style="text-decoration: none; color: black;">워드클라우드</a>
-
+    <a href="{% url 'boards:test' %}" style="text-decoration: none; color: black; ">LDA 보기</a> <br>-->
+    <h4>사람들의 생생한 후기를 한 눈에!</h4>
+   
+    <br>
     <div id="wd">
+    <a href="{% url 'boards:apart' %}" style="text-decoration: none; color: black;">연극</a>
     <div id="wordcloud1" class="carousel slide">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://i.ibb.co/gvKydwq/p21-1.png" class="d-block w-100 h-100" alt="..." />
-                <div class="carousel-caption">21년 1월</div>
+                <img src="https://i.ibb.co/GQmy605/1.png" class="d-block w-100 h-100" alt="..." />
+                <!--<div class="carousel-caption">21년 1월</div>
             </div>
             <div class="carousel-item">
                 <img src="https://i.ibb.co/Lz3mk3h/p21-2.png" class="d-block w-100" alt="..." />
@@ -117,6 +115,50 @@
                 <img src="https://i.ibb.co/vj6SX2q/p22-1.png" alt="p22-1" class="d-block w-100" />
                 <div class="carousel-caption">21년 3월</div>
             </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/BqJJ41X/p22-2.png" alt="p22-2" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/2jFb0FT/p22-3.png" alt="p22-3" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/47w7sQC/p22-4.png" alt="p22-4" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/G0rfD5d/p22-5.png" alt="p22-5" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/dBhdK7D/p22-6.png" alt="p22-6" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/Ryhzn88/p22-7.png" alt="p22-7" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/yy8zfWP/p22-8.png" alt="p22-8" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/zS34fNQ/p22-9.png" alt="p22-9" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/tbMR06D/p22-10.png" alt="p22-10" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/N1107C5/p22-11.png" alt="p22-11" class="d-block w-100" />
+                <div class="carousel-caption">21년 3월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/xgFPJz0/p22-12.png" alt="p22-12" class="d-block w-100" />
+                <div class="carousel-caption">22년 12월</div>-->
+            </div>
         </div>
         <button class="carousel-control-prev btn btn-primary" type="button" data-bs-target="#wordcloud1" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -128,11 +170,13 @@
         </button>
     </div>
 
+
+    <a href="{% url 'boards:apart' %}" style="text-decoration: none; color: black;">뮤지컬</a>
     <div id="wordcloud2" class="carousel slide">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://i.ibb.co/5nTx36t/21-1.png" class="d-block w-100 h-100" alt="..." />
-                <div class="carousel-caption">21년 1월</div>
+                <img src="https://i.ibb.co/cN2VZ9X/2.png" class="d-block w-100 h-100" alt="..." />
+             <!--   <div class="carousel-caption">21년 1월</div>
             </div>
             <div class="carousel-item">
                 <img src="https://i.ibb.co/7vmqfPY/21-2.png" class="d-block w-100" alt="..." />
@@ -202,6 +246,30 @@
                 <img src="https://i.ibb.co/r0SvxbJ/22-6.png" alt="p22-6" class="d-block w-100" />
                 <div class="carousel-caption">22년 6월</div>
             </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/fkH89fy/22-7.png" alt="p22-7" class="d-block w-100" />
+                <div class="carousel-caption">22년 7월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/zGDNjR1/22-8.png" alt="p22-8" class="d-block w-100" />
+                <div class="carousel-caption">22년 8월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/1T9XxG1/22-9.png" alt="p22-9" class="d-block w-100" />
+                <div class="carousel-caption">22년 9월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/h98XJjw/22-10.png" alt="p22-10" class="d-block w-100" />
+                <div class="carousel-caption">22년 10월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/gwBdYmb/22-11.png" alt="p22-11" class="d-block w-100" />
+                <div class="carousel-caption">22년 11월</div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.ibb.co/Y0drW8k/22-12.png" alt="p22-12" class="d-block w-100" />
+                <div class="carousel-caption">22년 12월</div>-->
+            </div>
         </div>
         <button class="carousel-control-prev btn btn-primary" type="button" data-bs-target="#wordcloud2" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -213,13 +281,16 @@
         </button>
     </div>
     </div>
-    <footer class="py-3 bg-secondary">
+    <br>
+    <footer class="py-2 bg-secondary">
         <div class="container">
             <p class="m-0 text-center text-white">
-                과거부터 지금까지의 Hot keyword 한 눈에 확인!
+                복합예술 추천 시스템
             </p>
         </div>
     </footer>
+
+
 
 
 {% endblock %}
