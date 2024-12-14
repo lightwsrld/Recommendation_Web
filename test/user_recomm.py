@@ -16,19 +16,19 @@ def concat_play_musical(play, musical):
 
 # 파일 경로를 함수화하면, 모든 코드가 복잡해지므로 전역변수화 시켰음
 
-play_top = "데이터\연극\연극_TOP77_장소병합.xlsx"
-musical_top = "데이터\뮤지컬\뮤지컬_TOP77.xlsx"
-play_top_star = "데이터\연극\playTop77_star.xlsx"
-musical_top_star = "데이터\뮤지컬\musicalTop77_star.xlsx"
-play_actor_lank = "데이터\연극\연극 배우 랭킹.csv"
-musical_actor_lank = "데이터\뮤지컬\뮤지컬 배우 랭킹.csv"
-play_top_cast = "데이터\연극\playTop77_casting.xlsx"
-musical_top_cast = "데이터\뮤지컬\musicalTop77_casting.xlsx"
+play_top = "데이터/연극/연극_TOP77_장소병합.xlsx"
+musical_top = "데이터/뮤지컬/뮤지컬_TOP77.xlsx"
+play_top_star = "데이터/연극/playTop77_star.xlsx"
+musical_top_star = "데이터/뮤지컬/musicalTop77_star.xlsx"
+play_actor_lank = "데이터/연극/연극 배우 랭킹.csv"
+musical_actor_lank = "데이터/뮤지컬/뮤지컬 배우 랭킹.csv"
+play_top_cast = "데이터/연극/playTop77_casting.xlsx"
+musical_top_cast = "데이터/뮤지컬/musicalTop77_casting.xlsx"
 
-play_top_poster = '데이터\연극\연극_TOP77_장소병합 (+포스터).xlsx'
-musical_top_poster = '데이터\뮤지컬\뮤지컬_TOP77 (+포스터).xlsx'
-play_stat = '데이터\연극\연극_통계_e.xlsx'
-musical_stat = '데이터\뮤지컬\뮤지컬_통계_e.xlsx'
+play_top_poster = '데이터/연극/연극_TOP77_장소병합 (+포스터).xlsx'
+musical_top_poster = '데이터/뮤지컬/뮤지컬_TOP77 (+포스터).xlsx'
+play_stat = '데이터/연극/연극_통계_e.xlsx'
+musical_stat = '데이터/뮤지컬/뮤지컬_통계_e.xlsx'
 
 top_lank = concat_play_musical(play_top, musical_top)
 top_star = concat_play_musical(play_top_star, musical_top_star)

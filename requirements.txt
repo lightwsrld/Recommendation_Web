@@ -6,3 +6,11 @@ pytz==2023.3
 sqlparse==0.4.4
 typing_extensions==4.7.1
 tzdata==2023.3
+markupsafe==2.0.1
+scikit-learn==1.2.2
+django-bootstrap4
+sentence-transformer
+konlpy
+joblib
+tqdm
+nltk
